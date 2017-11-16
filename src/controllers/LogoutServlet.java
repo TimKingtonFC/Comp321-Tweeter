@@ -1,7 +1,7 @@
+package controllers;
 
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,27 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class LogoutServlet
  */
-@WebServlet("/login")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/logout")
+public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nextPage = "login.jsp";
+		HttpSession session = request.getSession();
+		session.invalidate();
 		
-		String username = request.getParameter("username");
-		
-		for (User u : User.users) {
-			if (u.getName().equals(username)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("user", u);
-				nextPage = "feed";
-				
-				break;
-			}
-		}
-		
-		response.sendRedirect(nextPage);
+		response.sendRedirect("login.jsp");
 	}
+
 }

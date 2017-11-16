@@ -1,3 +1,4 @@
+package controllers;
 
 
 import java.io.IOException;
@@ -8,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import models.Tweet;
+import models.User;
 
 @WebServlet("/feed")
 public class FeedServlet extends HttpServlet {
@@ -22,14 +26,22 @@ public class FeedServlet extends HttpServlet {
 		}
 	
 		request.setAttribute("user", u);
-		request.setAttribute("tweet", Tweet.theTweet);
+		request.setAttribute("tweets", Tweet.tweets);
 		
 		getServletContext().getRequestDispatcher("/feed.jsp")
 				.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("message"));
+		HttpSession session = request.getSession();
+		User u = (User)session.getAttribute("user");
+		if (u == null) {
+			response.sendRedirect("login.jsp");
+			return;
+		}
+		
+		Tweet.addTweet(u, request.getParameter("message"));
+		response.sendRedirect("feed");
 	}
 
 }
