@@ -4,6 +4,11 @@ public class User {
 	private String username;
 	private String avatarUrl;
 	
+	public static User [] users = new User[] {
+		new User("Darth Vader", "@sithlord", "swvader.png"),
+		new User("Han Solo", "@nerfherder", "swhan.png")	
+	};
+	
 	public User() {
 	}
 	

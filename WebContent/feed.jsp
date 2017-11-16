@@ -7,7 +7,10 @@
 </head>
 <body>
 	<section class="userinfo">
-	Userinfo
+	Logged in as: ${user.name}
+	<form action="logout" method="post">
+		<input type="submit" value="Logout">
+	</form>
 	</section>
 	<section class="feed">
 		<form action="feed" method="post">
