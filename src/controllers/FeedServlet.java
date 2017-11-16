@@ -22,11 +22,7 @@ public class FeedServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User u = (User)session.getAttribute("user");
-		if (u == null) {
-			response.sendRedirect("login.jsp");
-			return;
-		}
-	
+		
 		request.setAttribute("user", u);
 		request.setAttribute("tweets", TweetDB.getAll());
 		
@@ -37,10 +33,6 @@ public class FeedServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User user = (User)session.getAttribute("user");
-		if (user == null) {
-			response.sendRedirect("login.jsp");
-			return;
-		}
 		
 		String message = request.getParameter("message");
 		Tweet tweet = new Tweet();
