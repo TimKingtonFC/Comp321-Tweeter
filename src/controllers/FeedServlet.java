@@ -2,6 +2,7 @@ package controllers;
 
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,6 +46,7 @@ public class FeedServlet extends HttpServlet {
 		Tweet tweet = new Tweet();
 		tweet.setMessage(message);
 		tweet.setUser(user);
+		tweet.setTimestamp(new Date());
 		
 		TweetDB.insert(tweet);
 		response.sendRedirect("feed");
