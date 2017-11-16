@@ -1,0 +1,45 @@
+@charset "ISO-8859-1";
+
+.userinfo {
+	float: left;
+	width: 15em;
+}
+
+.feed {
+	width: 25em;
+	margin-left: 1em;
+	float: left;
+}
+
+.avatar {
+	float: left;
+	height: 3em;
+	width: 3em;
+	border-radius: 50%;
+}
+
+.postbody {
+	margin-left: 4em;
+}
+
+.name {
+	font-weight: bold;
+}
+
+.username {
+	color: gray; 
+}
+
+.time {
+    color: gray;
+}
+
+.time:before {
+    content: "\00b7";
+}
+
+.iconbar img {
+	height: 1em;
+	width: 1em;
+	margin-left: 0.5em;
+}
