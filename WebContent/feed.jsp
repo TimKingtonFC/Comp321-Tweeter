@@ -10,7 +10,7 @@
 	Userinfo
 	</section>
 	<section class="feed">
-		<form action="FeedServlet" method="post">
+		<form action="feed" method="post">
 			<input type="text" name="message">
 			<input type="submit" value="Tweet">
 		</form>
@@ -26,8 +26,8 @@
 			  <p class="posttext">${tweet.message}</p>
 			  <div class="iconbar">
 			  	<img src="comment.png">
-			  	<img src="retweet.jpg">
-			  	<img src="heart.png">
+			  	<a href="retweet"><img src="retweet.jpg"></a>${tweet.numRetweets}
+			  	<a href="like"><img src="heart.png"></a>${tweet.numLikes}
 			  </div>
 		  </div>
 		</article>
