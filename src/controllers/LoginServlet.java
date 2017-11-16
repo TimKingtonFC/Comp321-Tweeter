@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import db.UserDB;
 import models.User;
 
 /**
@@ -24,14 +25,11 @@ public class LoginServlet extends HttpServlet {
 		
 		String username = request.getParameter("username");
 		
-		for (User u : User.users.values()) {
-			if (u.getName().equals(username)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("user", u);
-				nextPage = "feed";
-				
-				break;
-			}
+		User u = UserDB.getByName(username);
+		if (u != null) {
+			HttpSession session = request.getSession();
+			session.setAttribute("user", u);
+			nextPage = "feed";
 		}
 		
 		response.sendRedirect(nextPage);

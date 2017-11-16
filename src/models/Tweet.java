@@ -1,9 +1,5 @@
 package models;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Tweet {
 	private int id;
@@ -12,32 +8,6 @@ public class Tweet {
 	private User user;
 	private int numLikes;
 	private int numRetweets;
-	
-	private static int nextTweetId;
-	public static List<Tweet> tweets = new ArrayList<Tweet>();
-	public static Map<Integer, Tweet> tweetsById = new HashMap<>();
-	
-	static {
-		String msg = "I find your lack of faith disturbing.  Really long long long long long long long long long long sentence.";
-		tweets.add(new Tweet(1, new Date(), msg, User.users.get(1)));
-		msg = "I've got a bad feeling about this.";
-		tweets.add(new Tweet(2, new Date(), msg, User.users.get(2)));
-		msg = "Auuuureghhhhhheggghh!";
-		tweets.add(new Tweet(3, new Date(), msg, User.users.get(3)));
-		
-		for (Tweet t : tweets) {
-			tweetsById.put(t.getId(), t);
-		}
-		
-		nextTweetId = 4;
-	}
-	
-	public static void addTweet(User user, String message) {
-		Tweet t = new Tweet(Tweet.nextTweetId++, new Date(), 
-				message, user);
-		Tweet.tweets.add(0, t);
-		Tweet.tweetsById.put(t.getId(), t);
-	}
 	
 	public Tweet() {
 	}

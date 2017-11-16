@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import db.TweetDB;
 import models.Tweet;
 import models.User;
 
@@ -26,7 +27,7 @@ public class FeedServlet extends HttpServlet {
 		}
 	
 		request.setAttribute("user", u);
-		request.setAttribute("tweets", Tweet.tweets);
+		request.setAttribute("tweets", TweetDB.getAll());
 		
 		getServletContext().getRequestDispatcher("/feed.jsp")
 				.forward(request, response);
@@ -34,13 +35,18 @@ public class FeedServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User u = (User)session.getAttribute("user");
-		if (u == null) {
+		User user = (User)session.getAttribute("user");
+		if (user == null) {
 			response.sendRedirect("login.jsp");
 			return;
 		}
 		
-		Tweet.addTweet(u, request.getParameter("message"));
+		String message = request.getParameter("message");
+		Tweet tweet = new Tweet();
+		tweet.setMessage(message);
+		tweet.setUser(user);
+		
+		TweetDB.insert(tweet);
 		response.sendRedirect("feed");
 	}
 

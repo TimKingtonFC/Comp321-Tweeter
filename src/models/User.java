@@ -1,19 +1,10 @@
 package models;
-import java.util.HashMap;
-import java.util.Map;
 
 public class User {
+	private int id;
 	private String name;
 	private String username;
 	private String avatarUrl;
-	
-	public static Map<Integer, User> users = new HashMap<>();
-	static {
-		users.put(1, new User("Darth Vader", "@sithlord", "swvader.png"));
-		users.put(2, new User("Han Solo", "@nerfherder", "swhan.png"));
-		users.put(3, new User("Chewy", "@chewy", "swchewy.png"));
-		users.put(4, new User("Rey", "@rey", "swrey.png"));	
-	};
 	
 	public User() {
 	}
@@ -47,5 +38,13 @@ public class User {
 
 	public void setAvatarUrl(String avatarUrl) {
 		this.avatarUrl = avatarUrl;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import db.TweetDB;
 import models.Tweet;
 
 /**
@@ -20,8 +21,9 @@ public class LikeServlet extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt((String)request.getParameter("id"));
-		Tweet t = Tweet.tweetsById.get(id);
-		t.setNumLikes(t.getNumLikes() + 1);
+		Tweet tweet = TweetDB.getById(id);
+		tweet.setNumLikes(tweet.getNumLikes() + 1);
+		TweetDB.update(tweet);
 		
 		getServletContext().getRequestDispatcher("/feed")
 				.forward(request, response);
